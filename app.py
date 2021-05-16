@@ -71,5 +71,10 @@ def poll_submit(id):
     # redirect to page to reload
     return bottle.redirect(f"/poll/{id}")
 
+# host static javascript
+@app.route("/static/main.js")
+def static_js():
+    return bottle.static_file("main.js", root="static/")
+
 # run app
 bottle.run(app, host="0.0.0.0", port=8080, debug=True)

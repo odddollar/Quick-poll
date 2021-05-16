@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="static/main.js" charset="utf-8"></script>
     <title>Quick poll</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
     <form method="POST" action="/">
         <label>
             Number of options
-            <select name="optnum">
+            <select name="optnum" onchange="change_input_fields()">
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
