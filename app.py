@@ -1,6 +1,9 @@
 import bottle
 import redis
+import random
+import string
 
+# create bottle app and redis connection
 app = bottle.Bottle()
 con = redis.Redis(host="redis", port=6379)
 
@@ -22,20 +25,33 @@ def home_submit():
     bottle.response.set_cookie("visited", "true")
     return bottle.redirect("/")
 
+# show creation page with number of options specified
 @app.route("/create/<options:re:[0-9]+>")
 def create(options):
     return bottle.template("create.html", options=options)
 
+# handle postback from creation page
 @app.route("/create", method="POST")
 def create_submit():
+    # change length of id
+    id_length = 7
+
+    # get all data from page and append to dictionary
     data = {}
     for field in bottle.request.forms.keys():
         data[field] = bottle.request.forms.get(field)
 
+    # create id and check that it isnt in use
+    id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(id_length))
+    while id in con.keys():
+        id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(id_length))
+
+    # iterate through keys in data dictionary and append to redis server
     for field in data.keys():
-        con.hset("test", field, data[field])
+        con.hset(id, field, data[field])
 
     with open("test.txt", "w") as file:
         file.write(str(con.keys()))
 
+# run app
 bottle.run(app, host="0.0.0.0", port=8080, debug=True)
