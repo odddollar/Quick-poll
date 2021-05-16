@@ -20,7 +20,7 @@
                 % if b"option" in key and b"tally" not in key:
                     <label>
                         {{data[key]}}: {{data[key+b"_tally"]}}
-                        <input type="radio" name="option" value="{{data[key]}}">
+                        <input type="radio" name="option" value="{{key}}">
                     </label><br>
                 % end
             % end
