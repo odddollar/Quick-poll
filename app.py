@@ -32,7 +32,10 @@ def create_submit():
     for field in bottle.request.forms.keys():
         data[field] = bottle.request.forms.get(field)
 
+    for field in data.keys():
+        con.hset("test", field, data[field])
+
     with open("test.txt", "w") as file:
-        file.write(str(data))
+        file.write(str(con.keys()))
 
 bottle.run(app, host="0.0.0.0", port=8080, debug=True)
