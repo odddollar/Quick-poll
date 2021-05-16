@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick poll</title>
+</head>
+<body>
+    % for key in data.keys():
+        % if key == b"title":
+            <h1>{{data[b"title"]}}</h1>
+        % end
+    % end
+    <form method="POST" action="/{{id}}">
+        % for key in data.keys():
+            % if b"option" in key and b"tally" not in key:
+                <label>
+                    {{data[key]}}: {{data[key+b"_tally"]}}
+                    <input type="radio" name="option" value="{{data[key]}}">
+                </label><br>
+            % end
+        % end
+        <input type="submit" value="Submit selection">
+    </form>
+</body>
+</html>
