@@ -13,6 +13,8 @@
         % for key in data.keys():
             % if key == b"title":
                 <h1>{{data[b"title"]}}</h1>
+            % elif key == b"total":
+                <h3>Total votes: {{data[b"total"]}}</h3>
             % end
         % end
         <form method="POST" action="/poll/{{id}}">

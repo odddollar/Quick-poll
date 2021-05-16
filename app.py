@@ -36,6 +36,9 @@ def poll_submit(id):
     # increment value at the id hash and selection key
     con.hincrby(id, f"{selection}_tally", 1)
 
+    # increment total field
+    con.hincrby(id, "total", 1)
+
     # redirect to page to reload
     return bottle.redirect(f"/poll/{id}")
 
@@ -67,6 +70,9 @@ def create_submit():
         # if the current field is an option field create corresponding field to keep track of tally
         if "option" in field:
             con.hset(id, f"{field}_tally", 0)
+
+    # create total field to keep track of total votes
+    con.hset(id, "total", 0)
 
     # render completed page with link to new poll
     return bottle.template("created.html", id=id)
