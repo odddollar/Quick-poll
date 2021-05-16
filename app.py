@@ -42,9 +42,9 @@ def create_submit():
         data[field] = bottle.request.forms.get(field)
 
     # create id and check that it isnt in use
-    id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(id_length))
+    id = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(id_length))
     while id in con.keys():
-        id = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(id_length))
+        id = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(id_length))
 
     # iterate through keys in data dictionary and append to redis server
     for field in data.keys():
