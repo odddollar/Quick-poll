@@ -8,30 +8,22 @@
 </head>
 <body>
     <h1>Welcome to Quick Poll</h1>
-    <h2>Favourite colour?</h2>
     <form method="POST" action="/">
         <label>
-            Red: {{option1}}
-            <input type="radio" name="options" value="option1">
+            Number of options
+            <select name="optnum">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
         </label><br>
-        <label>
-            Green: {{option2}}
-            <input type="radio" name="options" value="option2">
-        </label><br>
-        <label>
-            Blue: {{option3}}
-            <input type="radio" name="options" value="option3">
-        </label><br>
-        <label>
-            Yellow: {{option4}}
-            <input type="radio" name="options" value="option4">
-        </label><br>
-        % if submitted == None:
-            <input type="submit">
-        % else:
-            <p>Already submitted</p>
-        % end
+        <input type="submit" value="GO!">
     </form>
-    
 </body>
 </html>
