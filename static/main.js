@@ -1,3 +1,7 @@
+// on page load set select to 2
+var select = document.getElementById("options");
+select.value = "2";
+
 function change_input_fields() {
     // get number of options from dropdown
     var value = document.getElementById("options").value;
