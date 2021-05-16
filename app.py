@@ -15,16 +15,29 @@ def home():
 # handle postback and redirect to appropriate options page
 @app.route("/", method="POST")
 def home_submit():
+    # get number of options and redirect
     options = bottle.request.forms.optnum
 
     return bottle.redirect(f"/create/{options}")
 
 # show poll based on id
 @app.route("/poll/<id:re:[0-9a-zA-Z]+>")
-def show_poll(id):
+def poll(id):
+    # get all data from redis and render template
     data = con.hgetall(id)
 
     return bottle.template("poll.html", data=data, id=id)
+
+@app.route("/poll/<id:re:[0-9a-zA-Z]+>", method="POST")
+def poll_submit(id):
+    # get option selection
+    selection = bottle.request.forms.option
+
+    # increment value at the id hash and selection key
+    con.hincrby(id, f"{selection}_tally", 1)
+
+    # redirect to page to reload
+    return bottle.redirect(f"/poll/{id}")
 
 # show creation page with number of options specified
 @app.route("/create/<options:re:[0-9]+>")
