@@ -15,43 +15,6 @@ def home():
 # handle postback and redirect to appropriate options page
 @app.route("/", method="POST")
 def home_submit():
-    # get number of options and redirect
-    options = bottle.request.forms.optnum
-
-    return bottle.redirect(f"/create/{options}")
-
-# show poll based on id
-@app.route("/poll/<id:re:[0-9a-zA-Z]+>")
-def poll(id):
-    # get all data from redis and render template
-    data = con.hgetall(id)
-
-    return bottle.template("poll.html", data=data, id=id)
-
-@app.route("/poll/<id:re:[0-9a-zA-Z]+>", method="POST")
-def poll_submit(id):
-    # get option selection
-    selection = bottle.request.forms.option
-
-    # check that valid data has been entered
-    if selection != "":
-        # increment value at the id hash and selection key
-        con.hincrby(id, f"{selection}_tally", 1)
-
-        # increment total field
-        con.hincrby(id, "total", 1)
-
-    # redirect to page to reload
-    return bottle.redirect(f"/poll/{id}")
-
-# show creation page with number of options specified
-@app.route("/create/<options:re:[0-9]+>")
-def create(options):
-    return bottle.template("create.html", options=options)
-
-# handle postback from creation page
-@app.route("/create", method="POST")
-def create_submit():
     # change length of id
     id_length = 7
 
@@ -83,6 +46,30 @@ def create_submit():
 
     # render completed page with link to new poll
     return bottle.template("created.html", id=id)
+
+# show poll based on id
+@app.route("/poll/<id:re:[0-9a-zA-Z]+>")
+def poll(id):
+    # get all data from redis and render template
+    data = con.hgetall(id)
+
+    return bottle.template("poll.html", data=data, id=id)
+
+@app.route("/poll/<id:re:[0-9a-zA-Z]+>", method="POST")
+def poll_submit(id):
+    # get option selection
+    selection = bottle.request.forms.option
+
+    # check that valid data has been entered
+    if selection != "":
+        # increment value at the id hash and selection key
+        con.hincrby(id, f"{selection}_tally", 1)
+
+        # increment total field
+        con.hincrby(id, "total", 1)
+
+    # redirect to page to reload
+    return bottle.redirect(f"/poll/{id}")
 
 # run app
 bottle.run(app, host="0.0.0.0", port=8080, debug=True)
