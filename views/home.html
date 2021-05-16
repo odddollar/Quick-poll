@@ -10,6 +10,22 @@
     <h1>Welcome to Quick Poll</h1>
     % if submitted == False:
     <form method="POST" target="/">
+        <label>
+            Option 1
+            <input type="radio" name="options" value="1">
+        </label><br>
+        <label>
+            Option 2
+            <input type="radio" name="options" value="2">
+        </label><br>
+        <label>
+            Option 3
+            <input type="radio" name="options" value="3">
+        </label><br>
+        <label>
+            Option 4
+            <input type="radio" name="options" value="4">
+        </label><br>
         <input type="submit">
     </form>
     % else:
