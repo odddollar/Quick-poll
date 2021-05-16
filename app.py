@@ -33,11 +33,13 @@ def poll_submit(id):
     # get option selection
     selection = bottle.request.forms.option
 
-    # increment value at the id hash and selection key
-    con.hincrby(id, f"{selection}_tally", 1)
+    # check that valid data has been entered
+    if selection != "":
+        # increment value at the id hash and selection key
+        con.hincrby(id, f"{selection}_tally", 1)
 
-    # increment total field
-    con.hincrby(id, "total", 1)
+        # increment total field
+        con.hincrby(id, "total", 1)
 
     # redirect to page to reload
     return bottle.redirect(f"/poll/{id}")
@@ -57,6 +59,11 @@ def create_submit():
     data = {}
     for field in bottle.request.forms.keys():
         data[field] = bottle.request.forms.get(field)
+
+    # check all data is present
+    for field in data.keys():
+        if data[field] == "":
+            return bottle.redirect(f"/create/{len(data)-1}")
 
     # create id and check that it isnt in use
     id = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(id_length))
