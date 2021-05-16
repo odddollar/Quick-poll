@@ -50,8 +50,8 @@ def create_submit():
     for field in data.keys():
         con.hset(id, field, data[field])
 
-    with open("test.txt", "w") as file:
-        file.write(str(con.keys()))
+    # render completed page with link to new poll
+    return bottle.template("created.html", id=id)
 
 # run app
 bottle.run(app, host="0.0.0.0", port=8080, debug=True)
