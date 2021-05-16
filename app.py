@@ -20,7 +20,7 @@ def home_submit():
     return bottle.redirect(f"/create/{options}")
 
 # show poll based on id
-@app.route("/<id>")
+@app.route("/poll/<id:re:[0-9a-zA-Z]+>")
 def show_poll(id):
     data = con.hgetall(id)
 
