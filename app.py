@@ -1,6 +1,8 @@
 import bottle
+import redis
 
 app = bottle.Bottle()
+redis_con = redis.Redis(host="redis", port=6379)
 
 @app.route("/")
 def home():
