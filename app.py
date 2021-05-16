@@ -49,6 +49,10 @@ def create_submit():
     # iterate through keys in data dictionary and append to redis server
     for field in data.keys():
         con.hset(id, field, data[field])
+        
+        # if the current field is an option field create corresponding field to keep track of tally
+        if "option" in field:
+            con.hset(id, f"{field}_tally", 0)
 
     # render completed page with link to new poll
     return bottle.template("created.html", id=id)
