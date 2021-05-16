@@ -22,4 +22,17 @@ def home_submit():
     bottle.response.set_cookie("visited", "true")
     return bottle.redirect("/")
 
+@app.route("/create/<options:re:[0-9]+>")
+def create(options):
+    return bottle.template("create.html", options=options)
+
+@app.route("/create", method="POST")
+def create_submit():
+    data = {}
+    for field in bottle.request.forms.keys():
+        data[field] = bottle.request.forms.get(field)
+
+    with open("test.txt", "w") as file:
+        file.write(str(data))
+
 bottle.run(app, host="0.0.0.0", port=8080, debug=True)
