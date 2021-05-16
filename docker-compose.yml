@@ -1,0 +1,12 @@
+version: "3.8"
+services: 
+    web:
+        container_name: web
+        build: .
+        ports: 
+            - 8080:8080
+        volumes: 
+            - .:/app
+    redis:
+        container_name: redis
+        image: redis:alpine
