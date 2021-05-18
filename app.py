@@ -97,6 +97,11 @@ def poll_submit(id):
 def static_js():
     return bottle.static_file("main.js", root="static/")
 
+# host static css
+@app.route("/static/main.css")
+def static_js():
+    return bottle.static_file("main.css", root="static/")
+
 # run app
 if heroku:
     bottle.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
