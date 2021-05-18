@@ -2,10 +2,21 @@ import bottle
 import redis
 import random
 import string
+import os
 
 # create bottle app and redis connection
 app = bottle.Bottle()
-con = redis.Redis(host="redis", port=6379)
+
+# check if running on heroku
+heroku = True if os.environ.get("APP_LOCATION") == "heroku" else False
+
+# connect to required redis
+if heroku:
+    # connect to heroku redis
+    con = redis.from_url(os.environ.get("REDIS_URL"))
+else:
+    # connect to local docker server
+    con = redis.Redis(host="redis", port=6379)
 
 # show home page with number of options for poll
 @app.route("/")
@@ -83,4 +94,7 @@ def static_js():
     return bottle.static_file("main.js", root="static/")
 
 # run app
-bottle.run(app, host="0.0.0.0", port=8080, debug=True)
+if heroku:
+    bottle.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+else:
+    bottle.run(app, host="0.0.0.0", port=8080, debug=True)
