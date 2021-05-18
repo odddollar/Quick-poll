@@ -13,7 +13,7 @@ heroku = True if os.environ.get("APP_LOCATION") == "heroku" else False
 # connect to required redis
 if heroku:
     # connect to heroku redis
-    con = redis.from_url(os.environ.get("REDIS_URL").strip())
+    con = redis.from_url(os.environ.get("REDIS_URL"))
 else:
     # connect to local docker server
     con = redis.Redis(host="redis", port=6379)
