@@ -4,41 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="/static/main.css"> 
     <title>Quick poll</title>
 </head>
 <body>
-    <h1>Welcome to Quick Poll</h1>
-    <form method="POST" action="/">
-        <label>
-            Number of options
-            <select name="optnum" id="options" onchange="change_input_fields()">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-        </label><br>
-        <label>
-            Question
-            <input type="text" name="title">
-        </label><br>
-        <div id="option-list">
-            <label>
-                Option 1
-                <input type="text" name="option1">
-            </label><br>
-            <label>
-                Option 2
-                <input type="text" name="option2">
-            </label><br>
+    <div class="w3-center w3-container">
+        <h1 class="w3-teal">Quick Poll</h1>
+        <div class="w3-card-4">
+            <h2>Create new poll</h2>
+            <form method="POST" action="/">
+                <label>
+                    Number of options
+                    <select name="optnum" id="options" onchange="change_input_fields()">
+                        % for i in range(2, 21):
+                            <option value="{{i}}">{{i}}</option>
+                        % end
+                    </select>
+                </label><br>
+                <label>
+                    Question
+                    <input type="text" name="title">
+                </label><br>
+                <div id="option-list">
+                    <label>
+                        Option 1
+                        <input type="text" name="option1">
+                    </label><br>
+                    <label>
+                        Option 2
+                        <input type="text" name="option2">
+                    </label><br>
+                </div>
+                <input type="submit" value="GO!">
+            </form>
         </div>
-        <input type="submit" value="GO!">
-    </form>
+        <footer class="w3-teal">
+            <p>All polls are automatically deleted after 45 minutes<br>
+                Source code: <a href="#">github.com/odddollar/</a></p>
+        </footer>
+    </div>
 
     <script type="text/javascript" src="static/main.js" charset="utf-8"></script>
 </body>
