@@ -3,6 +3,7 @@ import redis
 import random
 import string
 import os
+from datetime import timedelta
 
 # create bottle app and redis connection
 app = bottle.Bottle()
@@ -47,6 +48,9 @@ def home_submit():
     # iterate through keys in data dictionary and append to redis server
     for field in data.keys():
         con.hset(id, field, data[field])
+
+        # set key to auto-delete after X amount of time
+        con.expire(id, timedelta(minutes=45))
         
         # if the current field is an option field create corresponding field to keep track of tally
         if "option" in field:
