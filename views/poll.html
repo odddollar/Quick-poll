@@ -26,7 +26,11 @@
                     </label><br>
                 % end
             % end
-            <input type="submit" value="Submit selection">
+            % if voted == False:
+                <input type="submit" value="Submit selection">
+            % else:
+                <p>Already voted</p>
+            % end
         </form>
     % end
 </body>

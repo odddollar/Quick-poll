@@ -53,7 +53,10 @@ def poll(id):
     # get all data from redis and render template
     data = con.hgetall(id)
 
-    return bottle.template("poll.html", data=data, id=id)
+    # get voted cookie information
+    voted = bottle.request.get_cookie(f"{id}_voted", default=False)
+
+    return bottle.template("poll.html", data=data, id=id, voted=voted)
 
 @app.route("/poll/<id:re:[0-9a-zA-Z]+>", method="POST")
 def poll_submit(id):
@@ -67,6 +70,9 @@ def poll_submit(id):
 
         # increment total field
         con.hincrby(id, "total", 1)
+
+    # save cookie to prevent multiple votes
+    bottle.response.set_cookie(f"{id}_voted", "True")
 
     # redirect to page to reload
     return bottle.redirect(f"/poll/{id}")
