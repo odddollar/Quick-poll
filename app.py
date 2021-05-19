@@ -35,11 +35,6 @@ def home_submit():
     for field in bottle.request.forms.keys():
         data[field] = bottle.request.forms.get(field)
 
-    # check all data is present
-    for field in data.keys():
-        if data[field] == "":
-            return bottle.redirect(f"/create/{len(data)-1}")
-
     # create id and check that it isnt in use
     id = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(id_length))
     while id in con.keys():
