@@ -92,15 +92,10 @@ def poll_submit(id):
     # redirect to page to reload
     return bottle.redirect(f"/poll/{id}")
 
-# host static javascript
-@app.route("/static/main.js")
-def static_js():
-    return bottle.static_file("main.js", root="static/")
-
-# host static css
-@app.route("/static/main.css")
-def static_js():
-    return bottle.static_file("main.css", root="static/")
+# host static files
+@app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
+def static(filename):
+	return bottle.static_file(filename, root="./static")
 
 # run app
 if heroku:
