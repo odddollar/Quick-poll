@@ -7,13 +7,8 @@
     <title>Quick poll</title>
 </head>
 <body>
-    % for key in data.keys():
-        % if key == b"title":
-            <h1>{{data[b"title"]}}</h1>
-        % elif key == b"total":
-            <h3>Total votes: {{data[b"total"]}}</h3>
-        % end
-    % end
+    <h1>{{data[b"title"]}}</h1>
+    <h3>Total votes: {{data[b"total"]}}</h3>
     <form method="POST" action="/poll/{{id}}">
         % for key in data.keys():
             % if b"option" in key and b"tally" not in key:
