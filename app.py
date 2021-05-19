@@ -68,6 +68,10 @@ def poll(id):
     # get all data from redis and render template
     data = con.hgetall(id)
 
+    # check that poll is valid
+    if len(data.keys()) == 0:
+        return bottle.template("invalid_poll.html")
+
     # get voted cookie information
     voted = bottle.request.get_cookie(f"{id}_voted", default=False)
 
