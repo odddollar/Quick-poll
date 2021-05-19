@@ -95,7 +95,7 @@ def poll_submit(id):
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
 def static(filename):
-	return bottle.static_file(filename, root="./static")
+	return bottle.static_file(filename, root="static/")
 
 # run app
 if heroku:
