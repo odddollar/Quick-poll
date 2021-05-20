@@ -1,20 +1,20 @@
 import bottle
 import redis
-import random
-import string
-import os
+from random import choice
+from string import ascii_letters, digits
+from os import environ
 from datetime import timedelta
 
 # create bottle app and redis connection
 app = bottle.Bottle()
 
 # check if running on heroku
-heroku = True if os.environ.get("APP_LOCATION") == "heroku" else False
+heroku = True if environ.get("APP_LOCATION") == "heroku" else False
 
 # connect to required redis
 if heroku:
     # connect to heroku redis
-    con = redis.from_url(os.environ.get("REDIS_URL"))
+    con = redis.from_url(environ.get("REDIS_URL"))
 else:
     # connect to local docker server
     con = redis.Redis(host="redis", port=6379)
@@ -36,9 +36,9 @@ def home_submit():
         data[field] = bottle.request.forms.get(field)
 
     # create id and check that it isnt in use
-    id = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(id_length))
+    id = ''.join(choice(ascii_letters + digits) for _ in range(id_length))
     while id in con.keys():
-        id = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(id_length))
+        id = ''.join(choice(ascii_letters + digits) for _ in range(id_length))
 
     # iterate through keys in data dictionary and append to redis server
     for field in data.keys():
@@ -98,6 +98,6 @@ def static(filename):
 
 # run app
 if heroku:
-    bottle.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    bottle.run(app, host="0.0.0.0", port=int(environ.get("PORT", 5000)))
 else:
     bottle.run(app, host="0.0.0.0", port=8080, debug=True)
