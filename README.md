@@ -4,5 +4,5 @@ Source code for the [Quick Poll](https://polls-quickly.herokuapp.com) website, w
 
 - Backend: Python using Bottle micro-framework
 - Frontend: HTML with W3.css providing good looks
-- Redis server contains all data
+- All data stored on Redis server
 - Site hosted on Heroku
