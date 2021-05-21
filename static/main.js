@@ -14,9 +14,14 @@ function change_input_fields() {
 
     // add necessary number of options
     for (var i = 1; i <= value; i++) {
+        // create class div
+        var div = document.createElement("div");
+        div.className = "entry-box";
+
         // create label element and set text
         var label = document.createElement("label");
         label.innerHTML = `Option ${i}\n`;
+        div.appendChild(label)
 
         // create input element and append to label
         var input = document.createElement("input");
@@ -25,9 +30,6 @@ function change_input_fields() {
         label.appendChild(input);
 
         // append label to container div
-        container.appendChild(label);
-
-        // append break to container div
-        container.appendChild(document.createElement("br"));
+        container.appendChild(div);
     }
 }
