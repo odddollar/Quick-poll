@@ -15,24 +15,30 @@
             <h2>Create new poll</h2>
             <form method="POST" action="/">
                 <div class="w3-panel">
-                    <label>
-                        Number of options
-                        <select name="optnum" id="options" onchange="change_input_fields()">
-                            % for i in range(2, 16):
-                                <option value="{{i}}">{{i}}</option>
-                            % end
-                        </select>
-                    </label><br>
-                    <label>
-                        Question
-                        <input type="text" name="title" required>
-                    </label><br>
+                    <div class="entry-box">
+                        <label>
+                            Number of options
+                            <select name="optnum" id="options" onchange="change_input_fields()">
+                                % for i in range(2, 16):
+                                    <option value="{{i}}">{{i}}</option>
+                                % end
+                            </select>
+                        </label><br>
+                    </div>
+                    <div class="entry-box">
+                        <label>
+                            Question
+                            <input type="text" name="title" required>
+                        </label><br>
+                    </div>
                     <div id="option-list">
                         % for i in range(1,3):
-                            <label>
-                                Option {{i}}
-                                <input type="text" name="option{{i}}" required>
-                            </label><br>
+                            <div class="entry-box">
+                                <label>
+                                    Option {{i}}
+                                    <input type="text" name="option{{i}}" required>
+                                </label><br>
+                            </div>
                         % end
                     </div>
                 </div>
