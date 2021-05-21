@@ -4,48 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/static/main.css">
     <title>Quick Poll</title>
 </head>
-<body class="w3-center">
+<body>
     % include("header.html")
-    <div class="w3-container">
-        <div class="w3-card-4">
-            <h2>Create new poll</h2>
-            <form method="POST" action="/">
-                <div class="w3-panel">
-                    <div class="entry-box">
-                        <label>
-                            Number of options
-                            <select name="optnum" id="options" onchange="change_input_fields()">
-                                % for i in range(2, 16):
-                                    <option value="{{i}}">{{i}}</option>
-                                % end
-                            </select>
-                        </label><br>
-                    </div>
-                    <div class="entry-box">
-                        <label>
-                            Question
-                            <input type="text" name="title" required>
-                        </label><br>
-                    </div>
-                    <div id="option-list">
-                        % for i in range(1,3):
-                            <div class="entry-box">
-                                <label>
-                                    Option {{i}}
-                                    <input type="text" name="option{{i}}" required>
-                                </label><br>
-                            </div>
-                        % end
-                    </div>
-                </div>
-                <input type="submit" value="GO!">
-            </form>
+    <h2>Create new poll</h2>
+    <form method="POST" action="/">
+        <label>
+            Number of options
+            <select id="options" onchange="change_input_fields()">
+                % for i in range(2, 16):
+                    <option value="{{i}}">{{i}}</option>
+                % end
+            </select>
+        </label><br>
+        <label>
+            Question
+            <input type="text" name="title" required>
+        </label><br>
+        <div id="option-list">
+            % for i in range(1,3):
+                    <label>
+                        Option {{i}}
+                        <input type="text" name="option{{i}}" required>
+                    </label><br>
+            % end
         </div>
-    </div>
+        <input type="submit" value="GO!">
+    </form>
     % include("footer.html")
 
     <script type="text/javascript" src="/static/main.js" charset="utf-8"></script>
