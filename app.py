@@ -35,6 +35,10 @@ def home_submit():
     for field in bottle.request.forms.keys():
         data[field] = bottle.request.forms.get(field)
 
+    # add "private" field if not present
+    if "private" not in data.keys():
+        data["private"] = "False"
+
     # create id and check that it isnt in use
     id = ''.join(choice(ascii_letters + digits) for _ in range(id_length))
     while id in con.keys():
@@ -55,7 +59,7 @@ def home_submit():
     con.hset(id, "total", 0)
 
     # render completed page with link to new poll
-    return bottle.template("created.html", id=id)
+    return bottle.template("created.html", id=id, private=str(data))
 
 # show poll based on id
 @app.route("/poll/<id:re:[0-9a-zA-Z]+>")
@@ -85,11 +89,13 @@ def poll_submit(id):
         # increment total field
         con.hincrby(id, "total", 1)
 
-    # save cookie to prevent multiple votes
-    bottle.response.set_cookie(f"{id}_voted", "True")
+        # save cookie to prevent multiple votes
+        bottle.response.set_cookie(f"{id}_voted", "True")
 
     # redirect to page to reload
     return bottle.redirect(f"/poll/{id}")
+
+# show list of public polls
 
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
