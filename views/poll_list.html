@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Poll</title>
+</head>
+<body>
+    <h1>Public polls</h1>
+    % for poll in data.keys():
+        <h2><a href="/poll/{{str(poll).replace('b', '').replace('\'', '')}}">{{data[poll][b"title"]}}</a></h2>
+    % end
+    % include("footer.html")
+</body>
+</html>

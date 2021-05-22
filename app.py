@@ -96,6 +96,24 @@ def poll_submit(id):
     return bottle.redirect(f"/poll/{id}")
 
 # show list of public polls
+@app.route("/poll")
+def poll_list():
+    # get list of keys
+    keys = con.keys()
+
+    # create data dictionary
+    data = {}
+
+    # iterate through keys and get "private" field from each
+    for key in keys:
+        private = con.hget(key, "private")
+
+        # check if poll is private, add if not
+        if private == b"False":
+            data[key] = con.hgetall(key)
+
+    # pass poll data to template
+    return bottle.template("poll_list.html", data=data)
 
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
