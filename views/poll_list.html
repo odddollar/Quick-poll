@@ -9,8 +9,9 @@
 <body>
     % include("header.html")
     <h1>Public polls</h1>
+    <h2>Total public polls: {{len(data.keys())}}</h2>
     % for poll in data.keys():
-        <h2><a href="/poll/{{str(poll).replace('b', '').replace('\'', '')}}">{{data[poll][b"title"]}}</a></h2>
+        <h3><a href="/poll/{{str(poll).replace('b', '').replace('\'', '')}}">{{data[poll][b"title"]}}</a></h3>
     % end
     % include("footer.html")
 </body>
