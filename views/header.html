@@ -1,3 +1,4 @@
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.slim.min.js" charset="utf-8"></script>
 <nav class="navbar is-primary">
     <div class="navbar-brand">
         <a href="/"><h1 class="navbar-item title is-4" style="color: white;">Quick Poll</h1></a>
@@ -7,7 +8,7 @@
             <span aria-hidden="true"></span>
         </a>
     </div>
-    <div class="navbar-menu" id="navbarmenu">
+    <div class="navbar-menu">
         <div class="navbar-start">
             <a class="navbar-item" href="/">Create</a>
             <a class="navbar-item" href="/poll">Polls</a>
@@ -17,3 +18,13 @@
         </div>
     </div>
 </nav>
+<script>
+    (function() {
+        var burger = document.querySelector('.navbar-burger');
+        var menu = document.querySelector('.navbar-menu');
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('is-active');
+            menu.classList.toggle('is-active');
+        });
+    })();
+</script>
