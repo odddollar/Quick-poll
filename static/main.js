@@ -24,6 +24,7 @@ function change_input_fields() {
         var input = document.createElement("input");
         input.type = "text";
         input.name = `option${i}`;
+        input.required = true;
         label.appendChild(input);
 
         // append label to container div

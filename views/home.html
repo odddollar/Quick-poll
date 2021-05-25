@@ -22,10 +22,13 @@
                     % end
                 </select>
             </label><br>
-            <label>
-                Question
-                <input type="text" name="title" required>
-            </label><br>
+            <div class="field">
+                <label class="label" for="title">Question</label>
+                <div class="control">
+                    <input class="home-input input is-primary" id="title" type="text" name="title" required>
+                </div>
+                <br>
+            </div>
             <div id="option-list">
                 % for i in range(1,3):
                         <label>
