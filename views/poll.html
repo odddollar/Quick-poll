@@ -18,7 +18,7 @@
             % for key in data.keys():
                 % if b"option" in key and b"tally" not in key:
                     <div class="field">
-                        <label class="has-text-weight-bold">{{data[key]}}</label>
+                        <label class="has-text-weight-bold result-label" style="font-size:20px;">{{data[key]}}</label>
                         <input type="radio" name="option" value="{{key}}"><br>
                         % total = int(data[b'total']) if int(data[b'total']) != 0 else 1
                         % colours = ["is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger"]
