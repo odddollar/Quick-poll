@@ -14,14 +14,16 @@
     <div class="card has-text-centered">
         <h1 class="title is-3">Create new poll</h1>
         <form method="POST" action="/">
-            <label>
-                Number of options
-                <select id="options" onchange="change_input_fields()">
-                    % for i in range(2, 16):
-                        <option value="{{i}}">{{i}}</option>
-                    % end
-                </select>
-            </label><br>
+            <div class="field">
+                <label class="label">Number of options</label>
+                <div class="control select is-primary">
+                    <select id="options" onchange="change_input_fields()">
+                        % for i in range(2, 16):
+                            <option value="{{i}}">{{i}}</option>
+                        % end
+                    </select>
+                </div>
+            </div>
             <div class="field">
                 <label class="label" for="title">Question</label>
                 <div class="control">
