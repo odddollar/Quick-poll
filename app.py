@@ -118,7 +118,12 @@ def poll_list():
 # run 404 error page
 @app.error(404)
 def error_404(error):
-    return bottle.template("error_404.html", error=error)
+    return bottle.template("error.html", error=error)
+
+# run 500 error page
+@app.error(500)
+def error_500(error):
+    return bottle.template("error.html", error=error)
 
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
