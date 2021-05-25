@@ -69,7 +69,7 @@ def poll(id):
 
     # check that poll is valid
     if len(data.keys()) == 0:
-        return bottle.template("invalid_poll.html")
+        raise bottle.HTTPError(status=404, body=f"Not found '{'/'+'/'.join(str(bottle.request.url).split('/')[-2:])}'")
 
     # get voted cookie information
     voted = bottle.request.get_cookie(f"{id}_voted", default=False)
@@ -114,6 +114,11 @@ def poll_list():
 
     # pass poll data to template
     return bottle.template("poll_list.html", data=data)
+
+# run 404 error page
+@app.error(404)
+def error_404(error):
+    return bottle.template("error_404.html", error=error)
 
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
