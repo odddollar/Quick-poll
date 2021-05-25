@@ -34,13 +34,11 @@
                         </label><br>
                 % end
             </div>
-            <div title="Private polls will not be shown on open poll list">
-                <label>
-                    <input type="checkbox" name="private" value="True">
-                    Private
-                </label><br>
-            </div>
-            <input type="submit" value="GO!">
+            <label title="Private polls will not be shown on open poll list">
+                <input type="checkbox" name="private">
+                Private
+            </label><br>
+            <input type="submit" value="GO!" class="button is-primary">
         </form>
     </div>
     % include("footer.html")
