@@ -20,3 +20,32 @@
 .private-label {
     margin-top: 12px;
 }
+
+.submit-selection {
+    margin-top: 12px;
+}
+
+.already-submitted {
+    margin-top: 12px;
+    padding-top: 7px;
+}
+
+.progress-wrapper {
+    position: relative;
+}
+  
+.progress-value {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: calc(1rem / 1.5);
+    line-height: 1rem;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+.progress.is-large+.progress-value {
+    font-size: calc(1.5rem / 1.5);
+    line-height: 1.5rem;
+  }
