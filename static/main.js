@@ -16,19 +16,35 @@ function change_input_fields() {
 
     // add necessary number of options
     for (var i = 1; i <= value; i++) {
-        // create label element and set text
-        var label = document.createElement("label");
-        label.innerHTML = `Option ${i}\n`;
+        // create field container div
+        var field_container = document.createElement("div")
+        field_container.className = "field";
 
-        // create input element and append to label
+        // create label element and set attributes
+        var label = document.createElement("label");
+        label.className = "label";
+        label.htmlFor = `option${i}`;
+        label.innerHTML = `Option ${i}\n`;
+        field_container.appendChild(label);
+
+        // create control div
+        var control = document.createElement("div");
+        control.className = "control";
+        field_container.appendChild(control);
+
+        // create input and append as child to control div
         var input = document.createElement("input");
+        input.className = "home-input input is-primary";
+        input.id = `option${i}`;
         input.type = "text";
         input.name = `option${i}`;
+        if (i == 1 || i == 2) {
+            input.placeholder = i == 1 ? "e.g. Good" : "e.g. Bad";
+        }
         input.required = true;
-        label.appendChild(input);
+        control.appendChild(input);
 
-        // append label to container div
-        container.appendChild(label);
-        container.appendChild(document.createElement("br"))
+        // append field container div to container div
+        container.appendChild(field_container);
     }
 }

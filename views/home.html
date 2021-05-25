@@ -25,17 +25,22 @@
             <div class="field">
                 <label class="label" for="title">Question</label>
                 <div class="control">
-                    <input class="home-input input is-primary" id="title" type="text" name="title" required>
+                    <input class="home-input input is-primary" id="title" type="text" name="title" placeholder="e.g. How are you?" required>
                 </div>
-                <br>
             </div>
             <div id="option-list">
-                % for i in range(1,3):
-                        <label>
-                            Option {{i}}
-                            <input type="text" name="option{{i}}" required>
-                        </label><br>
-                % end
+                <div class="field">
+                    <label class="label" for="option1">Option 1</label>
+                    <div class="control">
+                        <input class="home-input input is-primary" id="option1" type="text" name="option1" placeholder="e.g. Good" required="">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="option2">Option 2</label>
+                    <div class="control">
+                        <input class="home-input input is-primary" id="option2" type="text" name="option2" placeholder="e.g. Bad" required="">
+                    </div>
+                </div>
             </div>
             <label title="Private polls will not be shown on open poll list">
                 <input type="checkbox" name="private">
