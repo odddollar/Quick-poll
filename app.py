@@ -59,7 +59,7 @@ def home_submit():
     con.hset(id, "total", 0)
 
     # render completed page with link to new poll
-    return bottle.template("created.html", id=id, private=str(data))
+    return bottle.template("created.html", id=id, url=bottle.request.url)
 
 # show poll based on id
 @app.route("/poll/<id:re:[0-9a-zA-Z]+>")
