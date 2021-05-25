@@ -11,36 +11,38 @@
 </head>
 <body>
     % include("header.html")
-    <h1>Create new poll</h1>
-    <form method="POST" action="/">
-        <label>
-            Number of options
-            <select id="options" onchange="change_input_fields()">
-                % for i in range(2, 16):
-                    <option value="{{i}}">{{i}}</option>
-                % end
-            </select>
-        </label><br>
-        <label>
-            Question
-            <input type="text" name="title" required>
-        </label><br>
-        <div id="option-list">
-            % for i in range(1,3):
-                    <label>
-                        Option {{i}}
-                        <input type="text" name="option{{i}}" required>
-                    </label><br>
-            % end
-        </div>
-        <div title="Private polls will not be shown on open poll list">
+    <div class="card">
+        <h1>Create new poll</h1>
+        <form method="POST" action="/">
             <label>
-                <input type="checkbox" name="private" value="True">
-                Private
+                Number of options
+                <select id="options" onchange="change_input_fields()">
+                    % for i in range(2, 16):
+                        <option value="{{i}}">{{i}}</option>
+                    % end
+                </select>
             </label><br>
-        </div>
-        <input type="submit" value="GO!">
-    </form>
+            <label>
+                Question
+                <input type="text" name="title" required>
+            </label><br>
+            <div id="option-list">
+                % for i in range(1,3):
+                        <label>
+                            Option {{i}}
+                            <input type="text" name="option{{i}}" required>
+                        </label><br>
+                % end
+            </div>
+            <div title="Private polls will not be shown on open poll list">
+                <label>
+                    <input type="checkbox" name="private" value="True">
+                    Private
+                </label><br>
+            </div>
+            <input type="submit" value="GO!">
+        </form>
+    </div>
     % include("footer.html")
     <script>set_select_default();</script>
 </body>
