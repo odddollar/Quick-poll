@@ -1,3 +1,4 @@
+/* global */
 .footer-style {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -13,6 +14,7 @@
     border-radius: 0;
 }
 
+/* home page */
 .home-input {
     width: 300px;
 }
@@ -21,6 +23,7 @@
     margin-top: 12px;
 }
 
+/* poll page */
 .submit-selection {
     margin-top: 12px;
 }
