@@ -66,3 +66,11 @@ strong {
     padding-top: 24px;
     padding-bottom: 24px;
 }
+
+.poll-header {
+    font-size: 140%;
+}
+
+.poll-info {
+    font-size: 115%;
+}
