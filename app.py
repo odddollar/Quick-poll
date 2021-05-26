@@ -123,9 +123,9 @@ def error_404(error):
     return bottle.template("error.html", error=error)
 
 # run 500 error page
-#@app.error(500)
-#def error_500(error):
-#    return bottle.template("error.html", error=error)
+@app.error(500)
+def error_500(error):
+    return bottle.template("error.html", error=error)
 
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")

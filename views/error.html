@@ -14,9 +14,7 @@
         <h1 class="title is-3">Error {{error.status_code}}</h1>
         <h1 class="title is-4">{{error.body}}</h1>
         % if error.traceback != None:
-            <code class="has-text-left">
-                {{error.traceback}}
-            </code>
+            <pre class="has-text-left">{{error.traceback}}</pre>
         % end
     </div>
     % include("footer.html")
