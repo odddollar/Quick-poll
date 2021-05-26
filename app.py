@@ -33,7 +33,9 @@ def home_submit():
     # get all data from page and append to dictionary
     data = {}
     for field in bottle.request.forms.keys():
-        data[field] = bottle.request.forms.get(field)
+        # dont add expiration data to data dictionary
+        if field != "expire":
+            data[field] = bottle.request.forms.get(field)
 
     # add "private" field if not present
     if "private" not in data.keys():
@@ -49,7 +51,7 @@ def home_submit():
         con.hset(id, field, data[field])
 
         # set key to auto-delete after X amount of time
-        con.expire(id, timedelta(minutes=45))
+        con.expire(id, timedelta(minutes=int(bottle.request.forms.expire)))
         
         # if the current field is an option field create corresponding field to keep track of tally
         if "option" in field:
@@ -121,9 +123,9 @@ def error_404(error):
     return bottle.template("error.html", error=error)
 
 # run 500 error page
-@app.error(500)
-def error_500(error):
-    return bottle.template("error.html", error=error)
+#@app.error(500)
+#def error_500(error):
+#    return bottle.template("error.html", error=error)
 
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
