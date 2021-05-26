@@ -10,11 +10,17 @@
 </head>
 <body>
     % include("header.html")
-    <h1>Public polls</h1>
-    <h2>Total public polls: {{len(data.keys())}}</h2>
-    % for poll in data.keys():
-        <h3><a href="/poll/{{str(poll).replace('b', '').replace('\'', '')}}">{{data[poll][b"title"]}}</a></h3>
-    % end
+    <div class="card has-text-centered">
+        <h1 class="title is-3">Public polls</h1>
+        <h2 class="subtitle is-5">Total public polls: {{len(data.keys())}}</h2>
+        % for poll in data.keys():
+            <section class="section">
+                <h3 style="font-size: 140%;"><strong>Question:</strong> {{data[poll][b"title"]}}</h3>
+                <h3 style="font-size: 115%;"><strong>Link:</strong> <a href="/poll/{{str(poll).replace('b', '').replace('\'', '')}}">{{poll}}</a></h3>
+                <h3 style="font-size: 115%;"><strong>Votes:</strong> {{data[poll][b"total"]}}</h3>
+            </section>
+        % end
+    </div>
     % include("footer.html")
 </body>
 </html>
