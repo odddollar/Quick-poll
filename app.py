@@ -49,9 +49,6 @@ def home_submit():
     # iterate through keys in data dictionary and append to redis server
     for field in data.keys():
         con.hset(id, field, data[field])
-
-        # set key to auto-delete after X amount of time
-        con.expire(id, timedelta(minutes=int(bottle.request.forms.expire)))
         
         # if the current field is an option field create corresponding field to keep track of tally
         if "option" in field:
@@ -59,6 +56,9 @@ def home_submit():
 
     # create total field to keep track of total votes
     con.hset(id, "total", 0)
+
+    # set key to auto-delete after X amount of time
+    con.expire(id, timedelta(minutes=int(bottle.request.forms.expire)))
 
     # render completed page with link to new poll
     return bottle.template("created.html", id=id, url=bottle.request.url)
