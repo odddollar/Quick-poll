@@ -37,9 +37,9 @@ def home_submit():
         if field != "expire":
             data[field] = bottle.request.forms.get(field)
 
-    # add "private" field if not present
-    if "private" not in data.keys():
-        data["private"] = "False"
+    # add "secret" field if not present
+    if "secret" not in data.keys():
+        data["secret"] = "False"
 
     # create id and check that it isnt in use
     id = ''.join(choice(ascii_letters + digits) for _ in range(id_length))
@@ -106,12 +106,12 @@ def poll_list():
     # create data dictionary
     data = {}
 
-    # iterate through keys and get "private" field from each
+    # iterate through keys and get "secret" field from each
     for key in keys:
-        private = con.hget(key, "private")
+        secret = con.hget(key, "secret")
 
-        # check if poll is private, add if not
-        if private == b"False":
+        # check if poll is secret, add if not
+        if secret == b"False":
             data[key] = con.hgetall(key)
 
     # pass poll data to template
