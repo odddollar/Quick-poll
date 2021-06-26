@@ -23,8 +23,9 @@ else:
 @app.route("/")
 def home():
     # ensure that https is used
-    if "http" in bottle.request.url and "https" not in bottle.request.url:
-        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+    url = bottle.request.url
+    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
+        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     return bottle.template("home.html")
 
@@ -71,8 +72,9 @@ def home_submit():
 @app.route("/poll/<id:re:[0-9a-zA-Z]+>")
 def poll(id):
     # ensure that https is used
-    if "http" in bottle.request.url and "https" not in bottle.request.url:
-        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+    url = bottle.request.url
+    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
+        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     # get all data from redis and render template
     data = con.hgetall(id)
@@ -109,8 +111,9 @@ def poll_submit(id):
 @app.route("/poll")
 def poll_list():
     # ensure that https is used
-    if "http" in bottle.request.url and "https" not in bottle.request.url:
-        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+    url = bottle.request.url
+    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
+        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     # get list of keys
     keys = con.keys()
@@ -143,8 +146,9 @@ def error_500(error):
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
 def static(filename):
     # ensure that https is used
-    if "http" in bottle.request.url and "https" not in bottle.request.url:
-        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+    url = bottle.request.url
+    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
+        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     return bottle.static_file(filename, root="static/")
 
