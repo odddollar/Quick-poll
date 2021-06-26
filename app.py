@@ -22,6 +22,10 @@ else:
 # show home page with number of options for poll
 @app.route("/")
 def home():
+    # ensure that https is used
+    if "http" in bottle.request.url and "https" not in bottle.request.url:
+        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+
     return bottle.template("home.html")
 
 # handle postback and redirect to appropriate options page
@@ -66,6 +70,10 @@ def home_submit():
 # show poll based on id
 @app.route("/poll/<id:re:[0-9a-zA-Z]+>")
 def poll(id):
+    # ensure that https is used
+    if "http" in bottle.request.url and "https" not in bottle.request.url:
+        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+
     # get all data from redis and render template
     data = con.hgetall(id)
 
@@ -100,6 +108,10 @@ def poll_submit(id):
 # show list of public polls
 @app.route("/poll")
 def poll_list():
+    # ensure that https is used
+    if "http" in bottle.request.url and "https" not in bottle.request.url:
+        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+
     # get list of keys
     keys = con.keys()
 
@@ -130,6 +142,10 @@ def error_500(error):
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
 def static(filename):
+    # ensure that https is used
+    if "http" in bottle.request.url and "https" not in bottle.request.url:
+        return bottle.HTTPResponse(status=308, headers={"Location": bottle.request.url.replace("http", "https")})
+
     return bottle.static_file(filename, root="static/")
 
 # run app
