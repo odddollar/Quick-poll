@@ -25,7 +25,7 @@ def home():
     # ensure that https is used
     url = bottle.request.url
     if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     return bottle.template("home.html")
 
@@ -74,7 +74,7 @@ def poll(id):
     # ensure that https is used
     url = bottle.request.url
     if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     # get all data from redis and render template
     data = con.hgetall(id)
@@ -113,7 +113,7 @@ def poll_list():
     # ensure that https is used
     url = bottle.request.url
     if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     # get list of keys
     keys = con.keys()
@@ -148,7 +148,7 @@ def static(filename):
     # ensure that https is used
     url = bottle.request.url
     if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=308, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
 
     return bottle.static_file(filename, root="static/")
 
