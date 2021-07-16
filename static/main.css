@@ -12,6 +12,8 @@
     margin: 16px;
     box-shadow: 0px 2.5px 10px 5px rgba(0, 0, 0, 0.2);
     border-radius: 0;
+    width: min(700px, calc(100vw - 48px));
+    margin-left: max(calc(100vw / 2 - min(700px, 100vw) / 2), 16px);
 }
 
 strong {
