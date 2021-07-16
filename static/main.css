@@ -1,4 +1,8 @@
 /* global */
+html {
+    overflow-y: auto;
+}
+
 .footer-style {
     padding-top: 8px;
     padding-bottom: 8px;
