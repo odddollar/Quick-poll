@@ -24,8 +24,8 @@ else:
 def home():
     # ensure that https is used
     url = bottle.request.url
-    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+    if "https" not in url:
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     return bottle.template("home.html")
 
@@ -73,8 +73,8 @@ def home_submit():
 def poll(id):
     # ensure that https is used
     url = bottle.request.url
-    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+    if "https" not in url:
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     # get all data from redis and render template
     data = con.hgetall(id)
@@ -112,8 +112,8 @@ def poll_submit(id):
 def poll_list():
     # ensure that https is used
     url = bottle.request.url
-    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+    if "https" not in url:
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     # get list of keys
     keys = con.keys()
@@ -147,8 +147,8 @@ def error_500(error):
 def static(filename):
     # ensure that https is used
     url = bottle.request.url
-    if ("http" in url and "https" not in url) or "herokuapp.com" in url:
-        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https") if "herokuapp.com" not in url else "https://www.pollsquickly.com"})
+    if "https" not in url:
+        return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     return bottle.static_file(filename, root="static/")
 
