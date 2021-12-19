@@ -24,7 +24,7 @@ else:
 def home():
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url:
+    if "https" not in url and heroku:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     return bottle.template("home.html")
@@ -73,7 +73,7 @@ def home_submit():
 def poll(id):
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url:
+    if "https" not in url and heroku:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     # get all data from redis and render template
@@ -112,7 +112,7 @@ def poll_submit(id):
 def poll_list():
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url:
+    if "https" not in url and heroku:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     # get list of keys
@@ -147,7 +147,7 @@ def error_500(error):
 def static(filename):
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url:
+    if "https" not in url and heroku:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     return bottle.static_file(filename, root="static/")
