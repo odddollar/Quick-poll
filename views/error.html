@@ -19,6 +19,11 @@
             <pre class="has-text-left">{{error.traceback}}</pre>
         % end
     </div>
+    % if error.status_code == 500:
+        <div class="card error-card">
+            <pre class="has-text-left">{{database_contents}}</pre>
+        </div>
+    % end
     % include("footer.html")
 </body>
 </html>

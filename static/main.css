@@ -72,6 +72,11 @@ strong {
 }
 
 /* polls page */
+.error-card {
+    width: calc(100vw - 32px); 
+    margin-left: 16px;
+}
+
 .section {
     padding-top: 24px;
     padding-bottom: 24px;

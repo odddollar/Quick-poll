@@ -140,7 +140,15 @@ def error_404(error):
 # run 500 error page
 @app.error(500)
 def error_500(error):
-    return bottle.template("error.html", error=error)
+    # get keys from redis and create data dictionary
+    keys = con.keys()
+    database_contents = {}
+
+    # iterate through keys and add to dictionary
+    for key in keys:
+        database_contents[key] = con.hgetall(key)
+
+    return bottle.template("error.html", error=error, database_contents=database_contents)
 
 # host static files
 @app.route("/static/<filename:re:.*\.(js|png|jpg|ico|css)>")
