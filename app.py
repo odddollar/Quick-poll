@@ -43,7 +43,9 @@ def home_submit():
         if field != "expire" and (field == "title" or len(findall("option[0-9]+", field)) != 0 or field == "secret"):
             data[field] = bottle.request.forms.get(field)
         elif field != "expire":
-            return bottle.redirect("/")
+            data["title"] = "Automated removal"
+            data["option1"] = "Automated removal"
+            bottle.request.forms.expire = 0
 
     # add "secret" field if not present
     if "secret" not in data.keys():
