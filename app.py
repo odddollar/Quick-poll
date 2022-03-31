@@ -4,6 +4,7 @@ from random import choice
 from string import ascii_letters, digits
 from os import environ
 from datetime import timedelta
+from re import findall
 
 # create bottle app and redis connection
 app = bottle.Bottle()
@@ -39,8 +40,10 @@ def home_submit():
     data = {}
     for field in bottle.request.forms.keys():
         # dont add expiration data to data dictionary
-        if field != "expire":
+        if field != "expire" and (field == "title" or len(findall("option[0-9]+", field)) != 0 or field == "secret"):
             data[field] = bottle.request.forms.get(field)
+        elif field != "expire":
+            return bottle.redirect("/")
 
     # add "secret" field if not present
     if "secret" not in data.keys():
