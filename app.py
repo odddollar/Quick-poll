@@ -9,12 +9,12 @@ from re import findall
 # create bottle app and redis connection
 app = bottle.Bottle()
 
-# check if running on heroku
-heroku = True if environ.get("APP_LOCATION") == "heroku" else False
+# check if running on cloud
+cloud = True if environ.get("APP_LOCATION") == "cloud" else False
 
 # connect to required redis
-if heroku:
-    # connect to heroku redis
+if cloud:
+    # connect to cloud redis
     con = redis.from_url(environ.get("REDIS_URL"))
 else:
     # connect to local docker server
@@ -25,7 +25,7 @@ else:
 def home():
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url and heroku:
+    if "https" not in url and cloud:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     return bottle.template("home.html")
@@ -78,7 +78,7 @@ def home_submit():
 def poll(id):
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url and heroku:
+    if "https" not in url and cloud:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     # get all data from redis and render template
@@ -117,7 +117,7 @@ def poll_submit(id):
 def poll_list():
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url and heroku:
+    if "https" not in url and cloud:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     # get list of keys
@@ -160,13 +160,13 @@ def error_500(error):
 def static(filename):
     # ensure that https is used
     url = bottle.request.url
-    if "https" not in url and heroku:
+    if "https" not in url and cloud:
         return bottle.HTTPResponse(status=301, headers={"Location": url.replace("http", "https")})
 
     return bottle.static_file(filename, root="static/")
 
 # run app
-if heroku:
+if cloud:
     bottle.run(app, host="0.0.0.0", port=int(environ.get("PORT", 5000)))
 else:
     bottle.run(app, host="0.0.0.0", port=8080, debug=True)
