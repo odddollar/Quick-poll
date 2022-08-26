@@ -1,5 +1,3 @@
 venv/
 *.txt
 .vscode/
-
-!runtime.txt
