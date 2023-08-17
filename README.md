@@ -5,7 +5,6 @@ Source code for the Quick Poll website, where you can easily create and share te
 - Backend: Python using Bottle micro-framework
 - Frontend: HTML with Bulma providing good looks
 - All data stored on Redis server
-- Site hosted on Render
 
 ## Images
 
